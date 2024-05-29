@@ -19,7 +19,7 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [contacts, setContacts] = useState(() => {
     const storedContacts = JSON.parse(localStorage.getItem("contacts"));
-    return storedContacts || initialContacts;
+    return storedContacts || [];
   });
 
   useEffect(() => {
