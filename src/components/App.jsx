@@ -8,28 +8,16 @@ import SearchBox from "./SearchBox/SearchBox";
 
 import ContactForm from "./ContactForm/ContactForm";
 
-const App = () => {
-  const initialContacts = [
-    { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-    { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-    { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-    { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-  ];
+import listContacts from "../listContacts.json";
 
+const contactInformation = () => {
+  const userList = localStorage.getItem("contacts");
+  return userList ? JSON.parse(userList) : listContacts;
+};
+
+function App() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [contacts, setContacts] = useState(() => {
-    const storedContacts = JSON.parse(localStorage.getItem("contacts"));
-    return storedContacts || [];
-  });
-
-  useEffect(() => {
-    const storedContacts = JSON.parse(localStorage.getItem("contacts"));
-    if (storedContacts) {
-      setContacts(storedContacts);
-    } else {
-      setContacts(initialContacts);
-    }
-  }, []);
+  const [contacts, setContacts] = useState(contactInformation);
 
   useEffect(() => {
     localStorage.setItem("contacts", JSON.stringify(contacts));
@@ -64,6 +52,6 @@ const App = () => {
       />
     </div>
   );
-};
+}
 
 export default App;
