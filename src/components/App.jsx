@@ -11,12 +11,12 @@ import ContactForm from "./ContactForm/ContactForm";
 import initialContacts from "../initialContacts.json";
 
 const getStoredContacts = () => {
-  const userList = localStorage.getItem("contacts");
-  return userList ? JSON.parse(userList) : initialContacts;
+  const StoredContacts = localStorage.getItem("contacts");
+  return StoredContacts ? JSON.parse(StoredContacts) : initialContacts;
 };
 
 function App() {
-  const [contacts, setContacts] = useState(initialContacts);
+  const [contacts, setContacts] = useState(getStoredContacts);
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -24,10 +24,14 @@ function App() {
     localStorage.setItem("contacts", JSON.stringify(contacts));
   }, [contacts]);
 
+  // const addContact = (newContact) => {
+  //   setContacts([...contacts, newContact]);
+  // };
   const addContact = (newContact) => {
-    setContacts([...contacts, newContact]);
+    setContacts((prevContacts) => {
+      return [...prevContacts, newContact];
+    });
   };
-
   const handleSearch = (value) => {
     setSearchTerm(value);
   };
