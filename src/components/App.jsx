@@ -10,13 +10,14 @@ import ContactForm from "./ContactForm/ContactForm";
 
 import initialContacts from "../initialContacts.json";
 
-const userInformation = () => {
+const getStoredContacts = () => {
   const userList = localStorage.getItem("contacts");
   return userList ? JSON.parse(userList) : initialContacts;
 };
 
 function App() {
-  const [contacts, setContacts] = useState(userInformation);
+  const [contacts, setContacts] = useState(initialContacts);
+
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
