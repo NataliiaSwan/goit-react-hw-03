@@ -31,7 +31,7 @@ const ContactForm = ({ onSubmit }) => {
         </div>
         <div className={css.box}>
           <label className={css.label} htmlFor="number">
-            Namber:
+            Number:
           </label>
           <Field className={css.field} type="text" id="number" name="number" />
           <ErrorMessage name="number" />

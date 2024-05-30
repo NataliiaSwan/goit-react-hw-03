@@ -8,23 +8,23 @@ import SearchBox from "./SearchBox/SearchBox";
 
 import ContactForm from "./ContactForm/ContactForm";
 
-import listContacts from "../listContacts.json";
+import initialContacts from "../initialContacts.json";
 
-const contactInformation = () => {
+const userInformation = () => {
   const userList = localStorage.getItem("contacts");
-  return userList ? JSON.parse(userList) : listContacts;
+  return userList ? JSON.parse(userList) : initialContacts;
 };
 
 function App() {
+  const [contacts, setContacts] = useState(userInformation);
   const [searchTerm, setSearchTerm] = useState("");
-  const [contacts, setContacts] = useState(contactInformation);
 
   useEffect(() => {
     localStorage.setItem("contacts", JSON.stringify(contacts));
   }, [contacts]);
 
-  const addContact = (contact) => {
-    setContacts([...contacts, contact]);
+  const addContact = (newContact) => {
+    setContacts([...contacts, newContact]);
   };
 
   const handleSearch = (value) => {
